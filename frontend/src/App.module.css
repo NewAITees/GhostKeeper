@@ -1,0 +1,7 @@
+/* App.module.css - アプリ全体の最上位スタイル */
+/* 現在は各コンポーネントが独自の module.css を持つため最小限 */
+
+.root {
+  width: 100%;
+  height: 100%;
+}

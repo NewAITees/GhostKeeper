@@ -1,0 +1,96 @@
+{
+  "id": "haunted_library",
+  "title": "呪われた図書館",
+  "description": "禁断の蔵書が眠るアーカム図書館で起こる怪事件。失踪した司書の謎を追え。",
+  "era": "1924年、マサチューセッツ州アーカム",
+  "location": "アーカム市立図書館",
+  "synopsis": "アーカム市立図書館の老司書ウィリアム・モースが行方不明になった。彼は「ネクロノミコン」の写本を発見したと興奮気味に語っていたが、翌朝には忽然と姿を消した。探索者は依頼を受け調査に乗り出すが、図書館の地下には何世紀にもわたって封印されてきた存在が眠っていた。",
+  "objective": "失踪した司書ウィリアム・モースの行方を調べ、図書館で起きている怪事件の真相を解明する。",
+  "starting_location": "main_entrance",
+  "characters": [
+    {
+      "id": "william_morse",
+      "name": "ウィリアム・モース",
+      "role": "neutral",
+      "description": "65歳の老司書。30年間図書館に勤める。禁書を発見後、精神が不安定になっている。地下に引き寄せられている。",
+      "secret": "すでに「声」に支配されはじめており、封印を解こうとしている。悪人ではなく被害者。",
+      "image_id": "william_morse",
+      "stats": { "str": 35, "con": 40, "siz": 50, "int": 75, "dex": 45, "pow": 60, "hp": 9 }
+    },
+    {
+      "id": "young_assistant",
+      "name": "エレン・チェイス",
+      "role": "ally",
+      "description": "図書館の若い助手（22歳）。モース失踪を最初に気づいた。探索者に協力的だが怖がっている。",
+      "secret": "地下から聞こえる声を聞いており、夢でうなされている。",
+      "image_id": "ellen_chase",
+      "stats": { "str": 40, "con": 50, "siz": 45, "int": 65, "dex": 60, "pow": 55, "hp": 10 }
+    },
+    {
+      "id": "the_presence",
+      "name": "名状しがたい存在",
+      "role": "monster",
+      "description": "地下に封印された次元外の存在。直接の姿は持たず、本の文字や影を通じて現れる。SAN喪失の主因。",
+      "secret": "完全な召喚には生贄が必要。モースを媒介として利用しようとしている。",
+      "stats": { "pow": 95, "hp": 999 }
+    }
+  ],
+  "locations": [
+    {
+      "id": "main_entrance",
+      "name": "正面玄関・受付",
+      "description": "重厚な木製扉、高い天井。受付にエレン・チェイスがいる。",
+      "atmosphere": "昼間でも薄暗く、古い紙とカビの匂いが漂う。奥から時折、不可解な物音が聞こえる。",
+      "image_id": "library_entrance",
+      "connections": ["main_hall", "staff_room"],
+      "clues": ["モースの日誌（机の引き出し）", "エレンの証言"]
+    },
+    {
+      "id": "main_hall",
+      "name": "大閲覧室",
+      "description": "天井まで伸びる書架、古い木製テーブル。数名の利用者がいる。",
+      "atmosphere": "蝋燭のような照明。本の影が奇妙な形を作っている気がする。",
+      "image_id": "library_main_hall",
+      "connections": ["main_entrance", "restricted_section", "basement_stairs"],
+      "clues": ["書架の一冊が不自然に開いたまま（P.233に奇妙な図形）", "床に点々と続く足跡"]
+    },
+    {
+      "id": "restricted_section",
+      "name": "禁書室",
+      "description": "鍵のかかった鉄柵の向こう。「関係者以外立入禁止」の札。",
+      "atmosphere": "柵の向こうから異様な冷気が漂う。本の背表紙の文字が読み取りにくい。",
+      "image_id": "library_restricted",
+      "connections": ["main_hall"],
+      "clues": ["ネクロノミコン写本の空の台座", "モースの落としたペン", "床に描かれた陣（書籍で隠されている）"]
+    },
+    {
+      "id": "basement_stairs",
+      "name": "地下への階段",
+      "description": "大閲覧室の隅、本棚の陰に隠れた下り階段。",
+      "atmosphere": "階段の下から冷たい空気と、かすかな呻き声のようなものが聞こえる。",
+      "image_id": "library_stairs",
+      "connections": ["main_hall", "basement"],
+      "clues": []
+    },
+    {
+      "id": "basement",
+      "name": "地下貯蔵室",
+      "description": "古い木箱と廃棄本が積まれた地下室。中央に奇妙な陣が描かれている。",
+      "atmosphere": "完全な暗闇。空気が重く、呼吸がしにくい。壁が脈打つように見える。ここにモースがいる。",
+      "image_id": "library_basement",
+      "connections": ["basement_stairs"],
+      "clues": ["陣の中心にいるモース（トランス状態）", "床に書き殴られた古代文字", "封印の石板（割れかけている）"]
+    },
+    {
+      "id": "staff_room",
+      "name": "職員室",
+      "description": "館長室とスタッフ用の小部屋。モースのデスクがある。",
+      "atmosphere": "散らかったメモ帳。壁にびっしりと書かれた計算式と図形。",
+      "image_id": "library_staff_room",
+      "connections": ["main_entrance"],
+      "clues": ["モースの研究ノート（神話的知識を得る：知識(クトゥルフ神話)+5、SAN-1d3）", "図書館長への手紙（未送付）"]
+    }
+  ],
+  "climax": "地下でトランス状態のモースを発見。封印の石板を修復（技巧ロールまたは知識(クトゥルフ神話)）するか、モースを地下から連れ出すことでエンディング。石板が完全に破壊されると「名状しがたい存在」が部分召喚され、即時SANチェック(1d6/1d20)が発生する。モース救出成功でグッドエンド。",
+  "gm_instructions": "このシナリオでは謎解き要素を重視する。戦闘は最終手段であり、基本的に「名状しがたい存在」と直接戦うことはできない。探索者が地下に降りる前に充分な手がかりを集めさせること。恐怖の演出は段階的に強めていく（最初は違和感、次第に明確な異常へ）。モースは悪人ではなく被害者として扱う。SANチェックのタイミング：①禁書室の陣を発見（0/1）②地下の光景を目撃（0/1d3）③モースのトランス状態（1/1d4）④存在の気配を感じた時（1/1d6）。"
+}

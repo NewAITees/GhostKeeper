@@ -1,0 +1,139 @@
+.layout {
+  display: grid;
+  grid-template-rows: 48px 1fr auto auto;
+  grid-template-columns: 1fr 280px;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.header {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 16px;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+}
+
+.backBtn {
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  font-size: 0.85rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.backBtn:hover {
+  color: var(--text-secondary);
+}
+
+.sessionName {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chat {
+  grid-column: 1;
+  grid-row: 2;
+  overflow: hidden;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border);
+}
+
+.sidebar {
+  grid-column: 2;
+  grid-row: 2 / 5;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-panel);
+  overflow-y: auto;
+}
+
+.navPanel {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.navLocation {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.navLabel {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.navValue {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.navNpcs {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.npcList {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-left: 4px;
+}
+
+.npcItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.npcIcon {
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.npcName {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.portraitArea {
+  flex: 1;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.choices {
+  grid-column: 1;
+  grid-row: 3;
+  border-right: 1px solid var(--border);
+}
+
+.input {
+  grid-column: 1;
+  grid-row: 4;
+  border-right: 1px solid var(--border);
+}

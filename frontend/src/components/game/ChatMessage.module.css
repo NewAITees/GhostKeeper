@@ -1,0 +1,198 @@
+/* GM メッセージ */
+.gmMessage {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 14px;
+  border-left: 3px solid var(--accent-dim);
+}
+
+.gmBadge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.gmText {
+  font-style: italic;
+  color: var(--text-primary);
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+/* NPC メッセージ */
+.npcMessage {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 14px;
+}
+
+.npcBadge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  background: var(--accent-dim);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  padding: 1px 8px;
+  letter-spacing: 0.04em;
+}
+
+.npcText {
+  color: var(--text-primary);
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+/* プレイヤーメッセージ */
+.playerMessage {
+  display: flex;
+  justify-content: flex-end;
+  padding: 6px 14px;
+}
+
+.playerInner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  max-width: 80%;
+}
+
+.playerBadge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.playerText {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px 2px 6px 6px;
+  padding: 8px 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ダイスメッセージ */
+.diceMessage {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  background: rgba(124, 77, 255, 0.05);
+  border-top: 1px dashed var(--border);
+  border-bottom: 1px dashed var(--border);
+  margin: 4px 0;
+}
+
+.diceIcon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.diceContent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.diceNotation {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.diceResult {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.diceDetail {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.diceSkillVal {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ダイス結果バッジ */
+.diceResultNormal {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 3px;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.diceResultSuccess {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 3px;
+  background: rgba(46, 125, 50, 0.2);
+  color: #66bb6a;
+  border: 1px solid var(--success);
+}
+
+.diceResultHard {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 3px;
+  background: rgba(21, 101, 192, 0.2);
+  color: #64b5f6;
+  border: 1px solid #1565c0;
+}
+
+.diceResultCritical {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 3px;
+  background: rgba(245, 124, 0, 0.2);
+  color: #ffb74d;
+  border: 1px solid var(--warning);
+}
+
+.diceResultFail {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 3px;
+  background: rgba(198, 40, 40, 0.2);
+  color: #ef9a9a;
+  border: 1px solid var(--danger);
+}
+
+/* システムメッセージ */
+.systemMessage {
+  text-align: center;
+  padding: 8px 16px;
+}
+
+.systemText {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 4px 12px;
+  display: inline-block;
+}

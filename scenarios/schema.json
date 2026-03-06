@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "object",
+  "required": ["id", "title", "synopsis", "starting_location", "objective", "locations", "gm_instructions"],
+  "properties": {
+    "id":          { "type": "string", "description": "URLセーフなID（ファイル名と一致させる）" },
+    "title":       { "type": "string", "description": "シナリオタイトル" },
+    "description": { "type": "string", "description": "短い説明（一覧表示用）" },
+    "era":         { "type": "string", "description": "時代設定（例: '1920s'）" },
+    "location":    { "type": "string", "description": "舞台地域" },
+    "synopsis":    { "type": "string", "description": "GM向け全体あらすじ（プレイヤーには非公開）" },
+    "starting_location": { "type": "string", "description": "開始ロケーションのID" },
+    "objective":   { "type": "string", "description": "プレイヤーの目標（公開情報）" },
+    "characters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "description"],
+        "properties": {
+          "id":          { "type": "string" },
+          "name":        { "type": "string" },
+          "role":        { "type": "string", "enum": ["ally", "neutral", "enemy", "monster"] },
+          "description": { "type": "string", "description": "GM向けキャラクター解説" },
+          "secret":      { "type": "string", "description": "プレイヤーに隠された真実" },
+          "image_id":    { "type": "string", "description": "images/characters/{image_id}/ のフォルダ名" },
+          "stats": {
+            "type": "object",
+            "description": "CoC 7版パラメータ（省略可。省略時はAIが適切に設定）",
+            "properties": {
+              "str": { "type": "integer" }, "con": { "type": "integer" },
+              "siz": { "type": "integer" }, "int": { "type": "integer" },
+              "dex": { "type": "integer" }, "pow": { "type": "integer" },
+              "hp":  { "type": "integer" }
+            }
+          }
+        }
+      }
+    },
+    "locations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "description"],
+        "properties": {
+          "id":          { "type": "string" },
+          "name":        { "type": "string" },
+          "description": { "type": "string", "description": "GM向けロケーション解説" },
+          "atmosphere":  { "type": "string", "description": "雰囲気・情景描写のヒント" },
+          "image_id":    { "type": "string", "description": "images/scenes/{image_id}.png のID" },
+          "connections": { "type": "array", "items": { "type": "string" } },
+          "clues":       { "type": "array", "items": { "type": "string" }, "description": "発見可能な手がかり" }
+        }
+      }
+    },
+    "climax": { "type": "string", "description": "クライマックス条件・クリア条件" },
+    "gm_instructions": { "type": "string", "description": "AIへのGM追加指示（シナリオ固有ルール・雰囲気・禁止事項など）" }
+  }
+}

@@ -1,0 +1,42 @@
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #111118;
+  --bg-panel: #161620;
+  --bg-card: #1a1a28;
+  --accent: #7c4dff;        /* 紫 - 神秘・魔術 */
+  --accent-dim: #4a2d99;
+  --danger: #c62828;        /* 赤 - 危険・SAN喪失 */
+  --warning: #f57c00;       /* オレンジ - 警告 */
+  --success: #2e7d32;       /* 緑 - 成功 */
+  --text-primary: #e8e0d0;  /* クリーム - 古い紙の色 */
+  --text-secondary: #a09880;
+  --text-muted: #6a6054;
+  --border: #2a2a3a;
+  --san-color: #7c4dff;     /* SAN = 紫 */
+  --hp-color: #c62828;      /* HP = 赤 */
+  --mp-color: #1565c0;      /* MP = 青 */
+
+  font-family: 'Noto Serif JP', 'Georgia', serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  /* 微妙なノイズテクスチャ感を出す */
+  background-image: radial-gradient(ellipse at top, #1a1a2e 0%, #0a0a0f 70%);
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }

@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+}
+
+.choiceBtn {
+  padding: 7px 14px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  transition: border-color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+
+.choiceBtn:hover:not(:disabled) {
+  border-color: var(--accent-dim);
+  background: rgba(124, 77, 255, 0.1);
+}
+
+.choiceBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

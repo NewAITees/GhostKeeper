@@ -326,10 +326,15 @@ async def _execute_dice_requests(
 
 
 def _resolve_san_event(
-    ai_response: AIResponse, pc: Character
+    ai_response: AIResponse,
+    pc: Character,
+    npc_models: list[Character] | None = None,
 ) -> tuple[list[DiceResult], list[StatUpdate], str]:
+    # デフォルト喪失値
     success_loss = "1"
     failure_loss = "1d6"
+
+    # AIがdice_requests.typeに "成功値/失敗値" 形式で指定した場合は優先採用
     for req in ai_response.dice_requests:
         if req.skill.upper() == "SAN" and "/" in req.type:
             parts = req.type.split("/", 1)
@@ -337,6 +342,15 @@ def _resolve_san_event(
                 success_loss = parts[0].strip() or "1"
                 failure_loss = parts[1].strip() or "1d6"
             break
+    else:
+        # AI未指定の場合: 現在のシーンにいるモンスターのnpc_memoryから取得
+        if npc_models:
+            for npc in npc_models:
+                mem = npc.npc_memory or {}
+                if mem.get("role") == "monster":
+                    success_loss = mem.get("san_loss_success", "1")
+                    failure_loss = mem.get("san_loss_failure", "1d6")
+                    break
 
     san_value = pc.san_current
     detail = skill_check(san_value, "normal")
@@ -777,7 +791,9 @@ async def send_chat(
         event_names.append(ai_response.game_event)
 
     if ai_response.game_event == "san_check":
-        event_dice, event_updates, event_line = _resolve_san_event(ai_response, pc)
+        event_dice, event_updates, event_line = _resolve_san_event(
+            ai_response, pc, npc_models
+        )
         all_dice_results.extend(event_dice)
         all_updates.extend(event_updates)
         dice_lines.append(event_line)

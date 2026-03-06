@@ -180,6 +180,84 @@ async def create_session(
             if s.get("id") == body.scenario_id:
                 scenario_data = s
                 break
+
+    # シナリオキャラクター（NPC/モンスター）をDBに生成
+    if scenario_data:
+        from app.models.monster import MonsterTemplate  # noqa: PLC0415
+
+        for ch in scenario_data.get("characters", []):
+            ch_id = ch.get("id")
+            template: MonsterTemplate | None = (
+                await db.get(MonsterTemplate, ch_id) if ch_id else None
+            )
+            stats = ch.get("stats", {})
+            if template:
+                npc = Character(
+                    id=str(uuid4()),
+                    session_id=session_id,
+                    name=template.name,
+                    is_pc=False,
+                    is_template=False,
+                    image_id=template.image_id,
+                    personality=template.personality,
+                    str_=template.str_,
+                    con=template.con,
+                    siz=template.siz,
+                    int_=template.int_,
+                    dex=template.dex,
+                    pow_=template.pow_,
+                    hp_max=template.hp_max,
+                    hp_current=template.hp_max,
+                    mp_max=max(1, template.pow_ // 5),
+                    mp_current=max(1, template.pow_ // 5),
+                    san_max=template.pow_ * 5,
+                    san_current=template.pow_ * 5,
+                    skills=dict(template.skills) if template.skills else {},
+                    npc_memory={
+                        "san_loss_success": template.san_loss_success,
+                        "san_loss_failure": template.san_loss_failure,
+                        "damage_bonus": template.damage_bonus,
+                        "armor": template.armor,
+                        "role": template.role,
+                    },
+                )
+            else:
+                # テンプレート未登録の場合はシナリオJSONの値をそのまま使用
+                pow_val = stats.get("pow", 50)
+                hp_val = stats.get("hp", stats.get("hp_max", 10))
+                role = ch.get("role", "neutral")
+                npc = Character(
+                    id=str(uuid4()),
+                    session_id=session_id,
+                    name=ch.get("name", "NPC"),
+                    is_pc=False,
+                    is_template=False,
+                    image_id=ch.get("image_id"),
+                    personality=ch.get("description"),
+                    str_=stats.get("str", 50),
+                    con=stats.get("con", 50),
+                    siz=stats.get("siz", 50),
+                    int_=stats.get("int", 50),
+                    dex=stats.get("dex", 50),
+                    pow_=pow_val,
+                    hp_max=hp_val,
+                    hp_current=hp_val,
+                    mp_max=max(1, pow_val // 5),
+                    mp_current=max(1, pow_val // 5),
+                    san_max=pow_val * 5,
+                    san_current=pow_val * 5,
+                    skills=ch.get("skills", {}),
+                    npc_memory={
+                        "san_loss_success": "1" if role == "monster" else "0",
+                        "san_loss_failure": "1d6",
+                        "damage_bonus": "0",
+                        "armor": 0,
+                        "role": role,
+                    },
+                )
+            db.add(npc)
+            logger.info("spawn npc: name=%s session=%s", npc.name, session_id)
+
     opening = _build_opening_narration(body.mode, pc, scenario_data)
     db.add(
         ChatHistory(

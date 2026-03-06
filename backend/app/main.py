@@ -26,7 +26,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from app.api import characters, chat, images, occupations, scenarios, sessions
+from app.api import characters, chat, images, monsters, occupations, scenarios, sessions
 from app.config import settings
 from app.database import init_db
 
@@ -34,6 +34,7 @@ from app.database import init_db
 from app.models import character as _char_model  # noqa: F401
 from app.models import chat as _chat_model  # noqa: F401
 from app.models import memory as _memory_model  # noqa: F401
+from app.models import monster as _monster_model  # noqa: F401
 from app.models import session as _session_model  # noqa: F401
 
 logging.basicConfig(
@@ -73,6 +74,7 @@ app.include_router(characters.router, prefix="/api/characters", tags=["character
 app.include_router(images.router, prefix="/api/images", tags=["images"])
 app.include_router(scenarios.router, prefix="/api/scenarios", tags=["scenarios"])
 app.include_router(occupations.router, prefix="/api/occupations", tags=["occupations"])
+app.include_router(monsters.router, prefix="/api/monsters", tags=["monsters"])
 
 
 @app.get("/api/health")
